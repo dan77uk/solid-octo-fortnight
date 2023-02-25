@@ -4,6 +4,7 @@ const cors = require("cors");
 
 app.use(cors());
 app.use(express.json());
+app.use(express.static("dist"));
 
 const requestLogger = (request, response, next) => {
   console.log(`Method: ${request.method}`);
@@ -129,12 +130,6 @@ app.patch("/api/projects/:id/changeLane", (request, response) => {
   project.lane = lane;
   response.json(project);
 });
-
-const unknownEndpoint = (request, response) => {
-  response.status(404).send({ message: "Unkown endpoint" });
-};
-
-app.use(unknownEndpoint);
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
