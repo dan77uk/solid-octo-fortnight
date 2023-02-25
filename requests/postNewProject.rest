@@ -1,0 +1,4 @@
+POST http://localhost:3001/api/projects
+Content-Type: application/json
+
+{ "title": "A test from VS Code Rest Client"}
