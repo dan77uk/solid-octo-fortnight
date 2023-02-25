@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
 
+app.use(cors());
 app.use(express.json());
 
 const requestLogger = (request, response, next) => {
@@ -16,18 +18,66 @@ app.use(requestLogger);
 let projects = [
   {
     id: 1,
-    title: "Build an API",
-    date: new Date(),
+    project_id: "p123",
+    project_title: "Test Project",
+    project_owner: "123",
+    title: "Fix navigation bug",
+    body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque egestas dictum libero, vel tristique odio pulvinar vitae.",
+    lane: 4,
   },
   {
     id: 2,
-    title: "Install Middleware",
-    date: new Date(),
+    project_id: "p123",
+    project_title: "Test Project",
+    project_owner: "123",
+    title: "Release new website",
+    body: "hasellus eleifend lacus vitae est ultrices placerat. Nunc at risus id risus venenatis laoreet sit amet cursus neque.",
+    lane: 1,
   },
   {
     id: 3,
-    title: "Run tests",
-    date: new Date(),
+    project_id: "p123",
+    project_title: "Test Project",
+    project_owner: "123",
+    title: "Change button color",
+    body: "Suspendisse ac lorem a neque tempus luctus non aliquam sapien. Cras ut lacus bibendum, placerat nibh eu, tempus neque.",
+    lane: 3,
+  },
+  {
+    id: 4,
+    project_id: "p123",
+    project_title: "Test Project",
+    project_owner: "123",
+    title: "Deploy server on acceptance environment",
+    body: "Pellentesque pharetra fermentum sapien, aliquet ultrices ligula mattis porttitor.",
+    lane: 2,
+  },
+  {
+    id: 5,
+    project_id: "p123",
+    project_title: "Test Project",
+    project_owner: "123",
+    title: "Change layout for the content page",
+    body: "Cras tellus ligula, mattis at facilisis eu, ultricies vel elit. Ut aliquam volutpat lacus, a rutrum sem vulputate non.",
+    lane: 3,
+  },
+  {
+    id: 6,
+    project_id: "p123",
+    project_title: "Test Project",
+    project_owner: "123",
+    title: "Complete the registration flow",
+    body: "In vel commodo ipsum. Duis id ipsum semper, condimentum ipsum sit amet, maximus massa.",
+    lane: 2,
+  },
+  {
+    id: 7,
+    project_id: "p123",
+    project_title: "Test Project",
+    project_owner: "123",
+    title: "Create new database instance",
+    body: "Curabitur nec sem lorem. Donec venenatis, arcu vitae malesuada consequat, dolor ante placerat mi, in fermentum diam ipsum id libero.",
+    lane: 4,
   },
 ];
 
@@ -65,7 +115,18 @@ app.post("/api/projects", (request, response) => {
   project.date = new Date();
 
   projects = [...projects, project];
-  console.log(projects);
+  response.json(project);
+});
+
+app.patch("/api/projects/:id/changeLane", (request, response) => {
+  const id = Number(request.params.id);
+  const { lane } = request.body;
+
+  const project = projects.find((project) => project.id === id);
+  if (!project) {
+    return response.status(404).json({ message: "No such project" });
+  }
+  project.lane = lane;
   response.json(project);
 });
 
@@ -75,7 +136,7 @@ const unknownEndpoint = (request, response) => {
 
 app.use(unknownEndpoint);
 
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
