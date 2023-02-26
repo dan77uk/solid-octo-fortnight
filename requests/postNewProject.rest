@@ -1,4 +1,24 @@
 POST http://localhost:3001/api/projects
 Content-Type: application/json
 
-{ "title": "A test from VS Code Rest Client"}
+{   
+  "project_id": 234,
+  "project_title": "A new project from REST",
+  "owner_id": 984,
+  "title": "Move middleware",
+  "content": "Middleware needs moved to seperate module",
+  "lane": 1
+}
+
+###
+// Post invalid project
+POST http://localhost:3001/api/projects
+Content-Type: application/json
+
+{   
+  "project_id": 234,
+  "project_title": "A new project from REST",
+  "owner_id": 984,
+  "title": "Move middleware",
+  "content": "Middleware needs moved to seperate module",
+}

@@ -1,0 +1,13 @@
+GET http://localhost:3001/api/projects
+
+###
+// Request valid project
+GET http://localhost:3001/api/projects/63fa43ff0e389421b9acb6f6
+
+###
+// Request for project that doesn't exist but with valid ID
+GET http://localhost:3001/api/projects/63fa43ff0e389421b9acb6f7
+
+###
+// Request for project that doesn't exist with invalid ID
+GET http://localhost:3001/api/projects/63fa43ff0e389421b9acb6f
