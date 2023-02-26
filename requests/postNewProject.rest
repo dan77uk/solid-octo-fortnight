@@ -19,6 +19,7 @@ Content-Type: application/json
   "project_id": 234,
   "project_title": "A new project from REST",
   "owner_id": 984,
-  "title": "Move middleware",
+  "title": "Move ",
   "content": "Middleware needs moved to seperate module",
+  "lane": 2
 }

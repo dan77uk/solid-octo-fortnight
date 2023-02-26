@@ -1,24 +1,31 @@
 const mongoose = require("mongoose");
 
-const url = process.env.MONGODB_URI;
-mongoose.set("strictQuery", false);
-
-mongoose
-  .connect(url)
-  .then((result) => {
-    console.log("Connected to MongoDB");
-  })
-  .catch((error) => {
-    console.log("Error connecting to MongoDB:", error.message);
-  });
-
 const projectSchema = new mongoose.Schema({
-  project_id: Number,
-  project_title: String,
-  project_owner: Number,
-  title: String,
-  body: String,
-  lane: Number,
+  project_id: {
+    type: Number,
+    required: true,
+  },
+  project_title: {
+    type: String,
+    required: true,
+  },
+  project_owner: {
+    type: Number,
+    required: true,
+  },
+  title: {
+    type: String,
+    required: true,
+    minLength: 10,
+  },
+  body: {
+    type: String,
+    required: true,
+  },
+  lane: {
+    type: Number,
+    required: true,
+  },
 });
 
 projectSchema.set("toJSON", {
